@@ -5,11 +5,11 @@ class Component {
         } else {
             this.hostElement = document.body;
         }
-        this.insertBefore = insertBefore
+        this.insertBefore = insertBefore;
     }
 
     detach() {
-        if (this.element){
+        if (this.element) {
             this.element.remove();
         }
         // this.element.parantElement.removeChild(this.element);// old way
@@ -17,10 +17,12 @@ class Component {
 
     attach() {        
         this.hostElement.insertAdjacentElement(
-            this.insertBefore ? 'afterbegin': 'beforeend', 
+            this.insertBefore 
+                ? 'afterbegin'
+                : 'beforeend', 
             this.element
         );
     }
 }
 
-export default Component
+export default Component;
