@@ -8,6 +8,7 @@
 
 # production
 /build
+/assets/scripts
 
 # misc
 .DS_Store

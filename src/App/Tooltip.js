@@ -1,4 +1,4 @@
-import Component from './Component.js';
+import Component from './Component';
 
 
 export class Tooltip extends Component {
@@ -6,8 +6,13 @@ export class Tooltip extends Component {
     constructor(closeNotifierFunction, text, hostElementId) {
         super(hostElementId);
         this.closeNotifier = closeNotifierFunction;
-        this.text = text
-        this.create()
+        this.text = text;
+        
+        this.closeTooltip = () => {
+            this.detach();
+            this.closeNotifier();
+        };   
+        this.create();
     }
 
     create() {
@@ -21,13 +26,12 @@ export class Tooltip extends Component {
         const hostElHight = this.hostElement.clientHeight;
         const parantElementScrolling = this.hostElement.parentElement.scrollTop; // for solving scrolling issue
 
-
         const x = hostElPosLeft + 20;
-        const y = hostElPosTop+ hostElHight - parantElementScrolling - 10;
+        const y = hostElPosTop + hostElHight - parantElementScrolling - 10;
 
-        tooltipElement.style.position = 'absolute'// requierd for change position of element
-        tooltipElement.style.left = x + 'px';
-        tooltipElement.style.top = y + 'px';
+        tooltipElement.style.position = 'absolute'; // requierd for change position of element
+        tooltipElement.style.left = `${x}px`;
+        tooltipElement.style.top = `${y}px`;
 
         tooltipElement.addEventListener('click', this.closeTooltip);
         this.element = tooltipElement;
@@ -35,10 +39,4 @@ export class Tooltip extends Component {
     }
 
 
-    closeTooltip = () => {
-        this.detach();
-        this.closeNotifier()
-    }   
 }
-
-
